@@ -1,7 +1,11 @@
 const Spots = require("../Models/venue.model")
 
-exports.getSpotsService = async () => {
-    const spots = await Spots.find({});
+exports.getSpotsService = async (query) => {
+    const spots = await Spots.find({})
+        .select(query.fields)
+        .sort(query.sort)
+        .skip(query.skip)
+        .limit(query.limit);
     return spots;
 };
 exports.postSpotService = async (data) => {

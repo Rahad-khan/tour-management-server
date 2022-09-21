@@ -2,7 +2,26 @@ const toursService = require("../Services/tours.services");
 
 exports.getTourSpots = async (req, res, next) => {
     try {
-        const result = await toursService.getSpotsService();
+        const { fields, sort, page, limit } = req.query;
+        const query = {};
+        if (fields) {
+            const fieldQuery = fields.split(',').join(' ');
+            query.fields = fieldQuery;
+        }
+        if (sort) {
+            const sortQuery = sort.split(',').join(' ');
+            query.sort = sortQuery;
+        };
+
+        if (page || limit) {
+            const { page = 1, limit = 3 } = req.query;
+            const skip = (page - 1) * +limit;
+            query.skip = skip;
+            query.limit = +limit;
+            console.log(`skip value ${skip} limit value ${limit}`)
+        }
+
+        const result = await toursService.getSpotsService(query);
         res.status(200).json({
             status: "success",
             data: result
