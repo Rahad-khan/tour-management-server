@@ -9,9 +9,9 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// app.get('/', (req, res) => {
-//     res.sendFile(__dirname + '/index.html')
-// });
+app.get('/', (req, res) => {
+    res.sendFile(__dirname + '/index.html')
+});
 
 app.use('/tours', toursRoute);
 app.use('/tour', tourRoute)

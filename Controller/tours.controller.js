@@ -18,7 +18,6 @@ exports.getTourSpots = async (req, res, next) => {
             const skip = (page - 1) * +limit;
             query.skip = skip;
             query.limit = +limit;
-            console.log(`skip value ${skip} limit value ${limit}`)
         }
 
         const result = await toursService.getSpotsService(query);
