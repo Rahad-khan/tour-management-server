@@ -17,7 +17,7 @@ app.use('/tours', toursRoute);
 app.use('/tour', tourRoute)
 
 app.get('*', (req, res) => {
-    res.status(400).send("Roots not fount")
+    res.status(400).send("Roots not found")
 });
 
 module.exports = app;
